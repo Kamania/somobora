@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Forum Fan Site</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="css/AdminLTE.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/versatile.css">
+        <link rel="stylesheet" href="css/skins/skin-blue.min.css">
+
+    </head>
+    <body class="hold-transition skin-blue ">
+        <div class="wrapper">
+
+            <header class="main-header">
+                <a href="index.html" class="logo">
+                    <span class="logo-mini"><b>F</b>S</span>
+                    <span class="logo-lg"><b>Forums & Chat</b></span>
+                </a>
+               <nav class="navbar navbar-static-top">
+
+                    <div class="">
+                        <ul class="nav navbar-nav">
+                            <li><a href="rooms.html"><i class="fa fa-comments"></i> Chat Rooms</a></li>
+                        </ul>
+                    </div>
+                     <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/profile"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+             
+
+        <section class="content">
+           <div class="row">
+              <div class="col-md-2">
+                 <div class="box box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Topics</h3>
+
+                      </div>
+                        <div class="box-body no-padding">
+                            <ul class="nav nav-pills nav-stacked" id="ul_category">
+                                 <li id="li_movies"><a href="/?category=movies"><i class="fa fa-film"></i> Movies </a></li>
+                                <li id="li_science"><a href="/?category=science"><i class="fa fa-bolt"></i> Science</a></li>
+                                <li id="li_relationship"><a href="/?category=relationship"><i class="fa fa-heart"></i> Relationship</a></li>
+                                <li id="li_cars"><a href="/?category=cars"><i class="fa fa-car"></i> Cars</a></li>
+                                <li id="li_education"><a href="/?category=education"><i class="fa fa-book"></i> Education </a></li>
+
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-7 ">
+
+                   <section class="">
+                   
+                      <ol class="breadcrumb panel " >
+                        <li ><a href="#"><i class="fa fa-dashboard"></i><b><span class="text-aqua"> Forums</span></b></a></li>
+                        <li><a href="#"><b><span class="text-fuchsia" id="category_crumb"></span></b></a></li>
+                    </ol>
+                  </section>
+                    <div class=" col-md-12 hidden" id="no_posts_div">
+                          <div class=" panel bg-red-gradient row row-centered" ><span class="col  col-centered" id="no_posts_span"><i class="fa fa-warning  "></i>  No Posts yet !  </span></div>  
+                    </div>
+
+                    <div id="posts_holder">
+
+                    </div>
+                </div>
+               <div class="col-lg-3 hidden" id="ask_post_box" >
+                   <div class="box box-solid">
+                       <div class="box-header with-border">
+                           <h3 class="box-title">Post</h3>
+                       </div>
+                       <div class=" box-body">
+                           <p>Start a discussion or create or ask a Question !</p>
+                           <div style="margin-left:30px;margin-right:30px;"><button class="btn btn-info btn-block" data-toggle="modal" data-target="#post_modal">Create Post</button></div>
+
+                       </div>
+                   </div>
+               </div>
+               <div class="col col-lg-3" >
+                
+               <div class="col-lg-12" id="ask_login_box">
+                   <div class="box box-solid" >
+                       <div class="box-header with-border">
+                           <h3 class="box-title">Login</h3>
+                       </div>
+                       <div class=" box-body">
+                         <p class="text-muted" style="margin-left:10px;margin-right:10px;">Create posts, share your thoughts, ask questions !</p>
+                          
+                         <div style="margin-left:30px;margin-right:30px;"><button class="btn btn-info  btn-block"  data-toggle="modal" data-target="#login_modal">Login Now</button></div>
+                           <br>
+                           <p class="text-muted">Don't have an account ? <a data-toggle="modal" data-target="#register_modal">Register !</a></p>
+
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-12">
+                 <div class="box box-solid" id="onlineUsersDiv">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Online users</h3>
+
+                      </div>
+                       <div class=" box-body" id="onlineUsersHolder">
+                           
+                       </div>
+                    </div>
+                </div>
+               </div>
+               </div>
+        </section>
+            </div>
+        </div>
+
+        <!--- Login Modal -->
+        <div class="modal fade " id="login_modal">
+
+        <div class="modal-dialog  ">
+          <div class="modal-content box" id="postBody">
+
+            <div class="modal-body " >
+
+                <div class="box-header with-border">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <div class="">
+                        <span class="title"><a href="#">Forum</a></span>
+                        <span class="description text-muted" >Secure Login</span>
+                    </div>
+                </div>
+            </div>
+              <!--Login Modal -->
+              <div class="modal-body">
+                  <div class="login-wrap ">
+                      <div class="panel row ">
+
+                          <div class="panel-body row row-centered ">
+
+                              <div class="col-lg-6 col col-centered col-md-12 col-sm-12 ">
+                                  <form id="loginForm" action="forum.html" method="post">
+                                      <div class="form-group has-feedback">
+                                          <label for="email" >Email</label>
+                                          <input type="email" id="email" class="form-control" placeholder="Email">
+                                          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                      </div>
+                                      <div class="form-group has-feedback">
+                                          <label for="password" >Password</label>
+                                          <input type="password" id="password" class="form-control" placeholder="Password">
+                                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-xs-8">
+                                              <div class="checkbox ">
+                                                  <label>
+                                                      <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                                  </label>
+                                              </div>
+                                          </div>
+                                          <!-- /.col -->
+                                          <div class="col-xs-4">
+                                              <button type="submit" class="btn btn-primary btn-block ">Sign In</button>
+                                          </div>
+
+                                      </div>
+                                      <div class="row  col-lg-12">
+                                          <div class="col-md-12 col-sm-12 ">
+                                              <a href="#">I forgot my password   </a>
+                                          </div>
+                                          <br>
+                                          <div class="col-md-12 col-sm-12 ">
+                                              <a href="register.html" > Register !!</a>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div><!-- /.modal-content -->
+        </div>
+        </div>
+        <!--- End of Login Modal -->
+        
+        <!--- Register Modal -->
+        <div class="modal fade " id="register_modal">
+
+        <div class="modal-dialog  ">
+          <div class="modal-content box" >
+
+            <div class="modal-body " >
+
+                <div class="box-header with-border">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <div class="">
+                        <span class="title"><a href="#">Forum</a></span>
+                        <span class="description text-muted" >secure</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+                 
+                  <div class=" ">
+                      <div class=" row ">
+
+                          <div class="panel-body row row-centered ">
+                            <div class="">
+                                <span class="title"><a href="#">Registration</a></span>
+                                <span class="description text-muted" >now</span>
+                            </div>
+                              <div class="col-lg-8 col col-centered col-md-12 col-sm-12 ">
+                                  <form id="registerForm" action="forum.html" method="post">
+                                      <div class="form-group has-feedback">
+                                          <label for="email" >Email</label>
+                                          <input type="email" id="email" class="form-control" placeholder="Email">
+                                          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                      </div>
+                                      <div class="form-group has-feedback">
+                                          <label for="password" >Password</label>
+                                          <input type="password" id="password" class="form-control" placeholder="Password">
+                                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                      </div>
+                                       <div class="form-group has-feedback">
+                                          <label for="password" >Confirm Password</label>
+                                          <input type="password" id="conf_password" class="form-control" placeholder="Password">
+                                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-xs-8">
+                                              <div class="checkbox ">
+                                                  <label>
+                                                      <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                                  </label>
+                                              </div>
+                                          </div>
+                                          <!-- /.col -->
+                                          <div class="col-xs-4">
+                                              <button type="submit" class="btn btn-primary btn-block ">Sign In</button>
+                                          </div>
+
+                                      </div>
+                                      <div class="row  col-lg-12">
+                                          <div class="col-md-12 col-sm-12 ">
+                                              <span>Have an account </span> <a href="#">Sign In  </a>
+                                          </div>
+                                        
+                                      </div>  
+                                  </form>
+                              </div>
+
+
+                          </div>
+                      </div>
+                  </div>
+
+          </div><!-- /.modal-content -->
+        </div>
+        </div>
+        <!--- End of Login Modal -->
+        
+       <div class="modal fade " id="post_modal">
+
+         <div class="modal-dialog  ">
+           <div class="modal-content box" id="postBody">
+
+            <div class="modal-body " >
+
+                <div class="box-header with-border">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <div class="">
+                        <span class="title"><a href="#">Christian union</a></span><br>
+                        <span class="text-muted">Create a Post & Share publicly</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <textarea id="compose-textarea"  class="form-control" style="height: 80px"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="btn btn-default btn-file">
+                        <i class="fa fa-paperclip"></i> Image Attachment
+                        <input type="file" class="avatar-input" id="attachedFile" name="attachedFile">
+                    </div>
+                    <p class="help-block">Max. 32MB</p>
+                    <ul class="mailbox-attachments clearfix" id="attachmentHolder">
+                    </ul>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " data-dismiss="modal" >Discard</button>
+                    <button type="submit" class="btn btn-primary" id="postCommentBtn"><i class="fa fa-envelope-post"></i> POST</button>
+                </div>
+                </div><!-- /.modal-content -->
+             </div>
+       </div>
+        <!--- Post Modal -->
+        
+        
+        <script src="js/jquery.min.js"></script>
+         <script src="/socket.io/socket.io.js"></script> 
+        <script src="js/init.js"></script>
+        <script src="js/forum.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body> 
+    <!-- /.content-wrapper -->

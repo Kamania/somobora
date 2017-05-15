@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Forum Fan Site</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="css/AdminLTE.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/skins/skin-blue.min.css">
+
+
+    </head>
+    <body class="hold-transition skin-blue ">
+        <div class="wrapper">
+
+            <header class="main-header">
+                <a href="index.html" class="logo">
+                    <span class="logo-mini"><b>F</b>S</span>
+                    <span class="logo-lg"><b>Forums & Chat</b></span>
+                </a>
+                <nav class="navbar navbar-static-top">
+
+                    <div class="">
+                        <ul class="nav navbar-nav">
+                            <li><a href="rooms.html"><i class="fa fa-comments"></i> Chat Rooms</a></li>
+                        </ul>
+                    </div>
+                     <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+             
+
+        <section class="content">
+           <div class="row">
+              
+                <div class="col-lg-7 col-lg-push-1">
+                   <section class="">
+                    <ol class="breadcrumb panel " >
+                        <li ><a href="#"><i class="fa fa-dashboard"></i><b><span class="text-aqua"> Forums</span></b></a></li>
+                        <li><a href="#"><b><span class="text-fuchsia">Science</span></b></a></li>
+                    </ol>
+                  </section>
+                    <div class="media box box-widget topic">
+                        <a>
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object img" src="img/user1-128x128.jpg" alt="User Image">
+                                </a>
+                            </div>
+                            <div class=" box-body media-right ">
+                                <div class="media-body">
+                                    <span class="media-heading name" id="post_text"></span>
+                                    <div class="chat_footer ">
+                                      <a class=" text-muted" id="username_poster"> </a>
+                                     <span class="reply_text pull-right" id="no_replies"> </span>
+                                   </div>
+                               
+                                </div>
+                            </div>
+                           
+                        </a>
+                       <div class="box-footer box-comments " id="reply_box" >
+                         
+                        </div>
+                         <div class="box-footer">
+                             <form action="#" method="post" id="replyForm">
+                              <div class="input-group">
+                                <input type="text" name="message" placeholder="Type Message ..." id="reply_field" class="form-control">
+                                    <span class="input-group-btn">
+                                      <button type="submit" class="btn btn-success btn-flat" >Send</button>
+                                    </span>
+                              </div>
+                            </form>
+                          </div>
+                    </div>
+                    
+                </div>
+               <div class="col-lg-3 col-lg-push-1">
+                 <div class="box box-solid">
+                    <div class="box-header with-border">
+                      
+                      </div>
+                       
+                    </div>
+                </div>
+        </section>
+            </div>
+        </div>
+            <script src="js/jquery.min.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/forum_replies.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body> 
+        </html>
+    <!-- /.content-wrapper -->
