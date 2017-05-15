@@ -2,11 +2,18 @@ var mysql = require('mysql');
 var auth = require('./auth');
 var posts = require('./forum');
 
-var db_config = {
+/*var db_config = {
       host     : '127.0.0.1',
       user     : 'root',
       password : 'chowder60',
       database : 'forum_site',
+ };*/
+
+var db_config = {
+      host     : 'us-cdbr-iron-east-04.cleardb.net',
+      user     : 'b24451f926df20',
+      password : '058c8002',
+      database : 'heroku_4ea7a5d697457a3',
  };
 
     var connection;
