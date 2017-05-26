@@ -5,8 +5,8 @@
   color: #3C8DBC;
 }
 .topic img {
-  width: 70px;
-  height: 70px;
+  width: 73px;
+  height: 73px;
   float: left;
 }
 .img_lg {
@@ -89,6 +89,10 @@
 .modal .title {
   font-size: 18px;
   padding-left: 10px;
+  font-weight: 600;
+}
+.modal .title2 {
+  font-size: 18px;
   font-weight: 600;
 }
 #no_posts_div {

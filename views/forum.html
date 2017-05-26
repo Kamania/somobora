@@ -51,7 +51,8 @@
                       </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked" id="ul_category">
-                                 <li id="li_movies"><a href="/?category=movies"><i class="fa fa-film"></i> Movies </a></li>
+                                <li id="li_trending"><a href="/?category=trending"><i class="fa fa-film"></i> Trending </a></li>
+                                <li id="li_movies"><a href="/?category=movies"><i class="fa fa-film"></i> Movies </a></li>
                                 <li id="li_science"><a href="/?category=science"><i class="fa fa-bolt"></i> Science</a></li>
                                 <li id="li_relationship"><a href="/?category=relationship"><i class="fa fa-heart"></i> Relationship</a></li>
                                 <li id="li_cars"><a href="/?category=cars"><i class="fa fa-car"></i> Cars</a></li>
@@ -80,7 +81,9 @@
 
                     </div>
                 </div>
-               <div class="col-lg-3 hidden" id="ask_post_box" >
+              
+               <div class="col col-lg-3 " >
+                 <div class="col-lg-12 hidden" id="ask_post_box" >
                    <div class="box box-solid">
                        <div class="box-header with-border">
                            <h3 class="box-title">Post</h3>
@@ -92,8 +95,6 @@
                        </div>
                    </div>
                </div>
-               <div class="col col-lg-3" >
-                
                <div class="col-lg-12" id="ask_login_box">
                    <div class="box box-solid" >
                        <div class="box-header with-border">
@@ -109,7 +110,7 @@
                        </div>
                    </div>
                </div>
-               <div class="col-lg-12">
+               <div class="col-lg-12 ">
                  <div class="box box-solid" id="onlineUsersDiv">
                     <div class="box-header with-border">
                       <h3 class="box-title">Online users</h3>
@@ -227,15 +228,15 @@
                                 <span class="description text-muted" >now</span>
                             </div>
                               <div class="col-lg-8 col col-centered col-md-12 col-sm-12 ">
-                                  <form id="registerForm" action="forum.html" method="post">
+                                  <form id="registerForm" action="/" method="post">
                                       <div class="form-group has-feedback">
                                           <label for="email" >Email</label>
-                                          <input type="email" id="email" class="form-control" placeholder="Email">
+                                          <input type="email" id="r_email" class="form-control" placeholder="Email">
                                           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                       </div>
                                       <div class="form-group has-feedback">
                                           <label for="password" >Password</label>
-                                          <input type="password" id="password" class="form-control" placeholder="Password">
+                                          <input type="password" id="r_password" class="form-control" placeholder="Password">
                                           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                       </div>
                                        <div class="form-group has-feedback">
@@ -247,7 +248,7 @@
                                           <div class="col-xs-8">
                                               <div class="checkbox ">
                                                   <label>
-                                                      <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                                      <input type="checkbox" checked=""> I agree to the <a href="#">terms</a>
                                                   </label>
                                               </div>
                                           </div>
@@ -265,7 +266,7 @@
                                       </div>  
                                   </form>
                               </div>
-
+                              <br><br>
 
                           </div>
                       </div>
@@ -276,51 +277,128 @@
         </div>
         <!--- End of Login Modal -->
         
+        <!--- Post Modal -->
        <div class="modal fade " id="post_modal">
-
+         
          <div class="modal-dialog  ">
+            
            <div class="modal-content box" id="postBody">
+               <div class="overlay hidden" id="loadingPost"> <i class="fa fa-refresh fa-spin "></i></div>
 
+           <form id="postForm">
             <div class="modal-body " >
 
                 <div class="box-header with-border">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
                     <div class="">
-                        <span class="title"><a href="#">Christian union</a></span><br>
-                        <span class="text-muted">Create a Post & Share publicly</span>
+                        <span class="title2"><a href="#">Create a topic/ask</a></span><br>
+                        <span class="text-muted">Share with everyone.</span>
                     </div>
                 </div>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <textarea id="compose-textarea"  class="form-control" style="height: 80px"></textarea>
-                </div>
-                <div class="form-group">
+           
+                <div class="modal-body" style="margin-top: 10px;">
+                
+                <div class="col-lg-4">
+                  <div class="form-group">
                     <div class="btn btn-default btn-file">
-                        <i class="fa fa-paperclip"></i> Image Attachment
-                        <input type="file" class="avatar-input" id="attachedFile" name="attachedFile">
+                        <img class="media-object img" id="post_img" src="img/user1-128x128.jpg" alt="Upload" style="width:130px;height: 130px;">
+                        <i class="fa fa-paperclip"></i>Upload Image
+                        <input type="file" class="avatar-input" id="post_input_file" name="attachedFile">
                     </div>
-                    <p class="help-block">Max. 32MB</p>
                     <ul class="mailbox-attachments clearfix" id="attachmentHolder">
                     </ul>
                 </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                    <label>Choose Topic</label>
+                    <select class="form-control " id="selectCategory" style="font-size: 14; font-weight: bold; color: #66afe9; background-color: white;" >
+                                <option value="Please Select" selected>Please Select</option>
+                                <option value="Movies" >Movies</option>
+                                <option value="Science" >Science</option>
+                                <option value="Relationship" >Relationship</option>
+                                <option value="Cars" >Cars</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="postTA"  class="form-control" style="height: 80px;font-size: 14; font-weight: bold; color: black; background-color: white;" required=""></textarea>
+                    </div>
+                </div>
+                   
+                
+            </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default " data-dismiss="modal" >Discard</button>
                     <button type="submit" class="btn btn-primary" id="postCommentBtn"><i class="fa fa-envelope-post"></i> POST</button>
                 </div>
-                </div><!-- /.modal-content -->
+             </form>
+                </div><!-- /.modal-content --> 
+                
+             </div>
+       </div>
+        <!--- Post Modal -->
+        
+         <!--- Post Modal -->
+       <div class="modal fade " id="profile_modal">
+         
+         <div class="modal-dialog  ">
+            
+           <div class="modal-content box" id="postBody">
+               <div class="overlay hidden" id="loadingUploadProfile"> <i class="fa fa-refresh fa-spin "></i></div>
+
+           <form id="profileUploadForm">
+            <div class="modal-body " >
+
+                <div class="box-header with-border">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <div class="">
+                        <span class="title2"><a href="#">Upload Profile</a></span><br>
+                        <span class="text-muted">Finish registration.</span>
+                    </div>
+                </div>
+          
+                <div class="modal-body" style="margin-top: 10px;">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <div class="btn btn-default btn-file">
+                        <img class="media-object img" id="profile_img" src="img/user1-128x128.jpg" alt="Upload" style="width:130px;height: 130px;">
+                        <i class="fa fa-paperclip"></i>Upload Profile Image
+                        <input type="file" class="avatar-input" id="profile_input_file" name="attachedFile">
+                    </div>
+                    <ul class="mailbox-attachments clearfix" id="attachmentHolder">
+                    </ul>
+                </div>
+                </div>
+                <div class="col-lg-8">
+                    <label>Choose Username</label>
+                    <div class="form-group">
+                        <input type="text" id="usernameTa"  class="form-control" style="font-size: 24; font-weight: bold; color: #66afe9; background-color: white;" required="">
+                    </div>
+                </div>
+            </div>
+                </div>
+               <br><br>
+                <div class="modal-footer">
+                     <br><br>
+                    <button type="button" class="btn btn-default " data-dismiss="modal" >Close</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-post"></i>Save Profile</button>
+                </div>
+             </form>
+                </div><!-- /.modal-content --> 
+                
              </div>
        </div>
         <!--- Post Modal -->
         
         
-        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
          <script src="/socket.io/socket.io.js"></script> 
         <script src="js/init.js"></script>
+         <script src="js/utils.js"></script>
         <script src="js/forum.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
     </body> 
     <!-- /.content-wrapper -->

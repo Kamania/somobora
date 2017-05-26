@@ -40,7 +40,9 @@
     
     function handleData(data,hasReplies){
         var postData = data.postData.data;
+        console.log(postData);
      
+        $("#post_img").attr("src","/image_uploads/posts/"+postData.image_path);
         $("#post_text").text(postData.post_text);
         $("#username_poster").text("By @"+postData.username);
         $("#no_replies").attr("no_replies",postData.no_replies);

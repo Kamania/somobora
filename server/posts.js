@@ -1,6 +1,6 @@
 function getPosts(connection,data,callback){
  
-    var query = connection.query("SELECT @post_id := `post_id` as `post_id`,@user_id := `user_id` as `user_id`,(SELECT `username` FROM `user` WHERE `user_id` = @user_id) as username,"+
+    var query = connection.query("SELECT @post_id := `post_id` as `post_id`,@user_id := `user_id` as `user_id`,`category_id`,(SELECT `username` FROM `user` WHERE `user_id` = @user_id) as username,`image_path`,"+
       " `post_text`,(SELECT count(*) FROM `post_reply` WHERE `post_id` = @post_id) as no_replies,CASE WHEN (TIMESTAMPDIFF(SECOND,`posts`.`created_at`,CURRENT_TIMESTAMP()))   < 60"+
 				" THEN  Concat((TIMESTAMPDIFF(SECOND,`posts`.`created_at`,CURRENT_TIMESTAMP())),' secs ago')"+
 		                " WHEN (TIMESTAMPDIFF(MINUTE,`posts`.`created_at`,CURRENT_TIMESTAMP()))  < 60"+
@@ -29,7 +29,56 @@ function getPosts(connection,data,callback){
                         post_text:rows[i]['post_text'],
                         time_gone:rows[i]['time_gone'],
                         no_replies:rows[i]['no_replies'],
+                        category_id:rows[i]['category_id'],
+                        image_path:rows[i]['image_path']
                     }
+                    dataArray.push(post_info);
+               }
+                callback({status:1,data:dataArray,message:"Success"});
+           }else{
+               callback({status:0,message:"No posts"});
+           }
+        
+    }else{console.log("errror in sql syntax "+err);}
+ });
+}
+
+//For trending only list with most
+function getTrendingPosts(connection,data,callback){
+ 
+    var query = connection.query("SELECT @post_id := `post_id` as `post_id`,@user_id := `user_id` as `user_id`,`category_id`,(SELECT `username` FROM `user` WHERE `user_id` = @user_id) as username,`image_path`,"+
+      " `post_text`,(SELECT count(*) FROM `post_reply` WHERE `post_id` = @post_id) as no_replies,CASE WHEN (TIMESTAMPDIFF(SECOND,`posts`.`created_at`,CURRENT_TIMESTAMP()))   < 60"+
+				" THEN  Concat((TIMESTAMPDIFF(SECOND,`posts`.`created_at`,CURRENT_TIMESTAMP())),' secs ago')"+
+		                " WHEN (TIMESTAMPDIFF(MINUTE,`posts`.`created_at`,CURRENT_TIMESTAMP()))  < 60"+
+		                " THEN  Concat((TIMESTAMPDIFF(MINUTE,`posts`.`created_at`,CURRENT_TIMESTAMP())),' min ago')"+
+				" WHEN (TIMESTAMPDIFF(HOUR,`posts`.`created_at`,CURRENT_TIMESTAMP()))  <= 24"+
+				" THEN  Concat((TIMESTAMPDIFF(HOUR,`posts`.`created_at`,CURRENT_TIMESTAMP())),' hours ago')"+
+				" WHEN (TIMESTAMPDIFF(DAY,`posts`.`created_at`,CURRENT_TIMESTAMP()))  <= 30"+
+				" THEN  Concat((TIMESTAMPDIFF(DAY,`posts`.`created_at`,CURRENT_TIMESTAMP())),' days ago')"+
+				" WHEN (TIMESTAMPDIFF(MONTH,`posts`.`created_at`,CURRENT_TIMESTAMP()))  <= 12"+
+				" THEN  Concat((TIMESTAMPDIFF(MONTH,`posts`.`created_at`,CURRENT_TIMESTAMP())),' months ago')"+
+				" WHEN (TIMESTAMPDIFF(YEAR,`posts`.`created_at`,CURRENT_TIMESTAMP()))  >= 1"+
+				" THEN  Concat((TIMESTAMPDIFF(YEAR,`posts`.`created_at`,CURRENT_TIMESTAMP())),' years ago')"+
+				" END AS time_gone,(SELECT COUNT(`post_id`) FROM `post_reply` WHERE `post_id` = @post_id) as `no`   \n\
+        from `posts` ORDER BY `no` DESC LIMIT 10 ",function(err, rows, fields) {
+   //console.log(query.sql);
+   
+    if (!err){
+                
+           if(rows.length > 0){
+               var dataArray = [];
+               for(var i= 0; i < rows.length; i++){
+                   var post_info = {
+                        user_id:rows[i]['user_id'],
+                        post_id:rows[i]['post_id'],
+                        username:rows[i]['username'],
+                        post_text:rows[i]['post_text'],
+                        time_gone:rows[i]['time_gone'],
+                        no_replies:rows[i]['no_replies'],
+                        category_id:rows[i]['category_id'],
+                        image_path:rows[i]['image_path']
+                       
+                    } 
                     dataArray.push(post_info);
                }
                 callback({status:1,data:dataArray,message:"Success"});
@@ -42,7 +91,7 @@ function getPosts(connection,data,callback){
 }
 function getPostData(connection,post_id,callback){
  
-    var query = connection.query("SELECT @post_id := `post_id` as `post_id`,@user_id := `user_id` as `user_id`,(SELECT `username` FROM `user` WHERE `user_id` = @user_id) as username,"+
+    var query = connection.query("SELECT @post_id := `post_id` as `post_id`,@user_id := `user_id` as `user_id`,`image_path`,(SELECT `username` FROM `user` WHERE `user_id` = @user_id) as username,"+
       " `post_text`,(SELECT count(*) FROM `post_reply` WHERE `post_id` = @post_id) as no_replies \n\
         from `posts` WHERE `post_id` = ? LIMIT 1",[post_id],function(err, rows, fields) {
    //console.log(query.sql);
@@ -56,6 +105,7 @@ function getPostData(connection,post_id,callback){
                         username:rows[0]['username'],
                         post_text:rows[0]['post_text'],
                         no_replies:rows[0]['no_replies'],
+                        image_path:rows[0]['image_path']
                     }
                 callback({status:1,data:post_info,message:"Success"});
            }else{
@@ -119,6 +169,18 @@ function getPostReplies(connection,data,callback){
     }else{console.log("errror in sql syntax "+err);}
  });
 }
+function createPost(connection,data,callback){
+    
+      var query = connection.query('INSERT INTO posts SET ?',data, function(err, result) {
+       if(!err){
+          callback({status:1,message:"Successful  Insertion"});
+       }else{
+           console.log(err);
+           callback({status:0,message:"Error while inserting reply"}); 
+       }
+      });
+  }
+  
 function insertReply(connection,data,callback){
      
      var insertDetails = {
@@ -145,6 +207,8 @@ function insertReply(connection,data,callback){
       });
   }
 
+exports.createPost = createPost;
 exports.insertReply = insertReply;
 exports.getPosts = getPosts;
 exports.getPostReplies = getPostReplies;
+exports.getTrendingPosts = getTrendingPosts;

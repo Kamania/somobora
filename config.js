@@ -1,12 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-module.exports = function(app){
+module.exports = function(app,io){
 
 	// Set .html as the default template extension
 	app.set('view engine', 'html');
         //support parsing of application/json type post data
         app.use(bodyParser.json());
+        
         //support parsing of application/x-www-form-urlencoded post data
         app.use(bodyParser.urlencoded({ extended: true })); 
 	// Initialize the ejs template engine
