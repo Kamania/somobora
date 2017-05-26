@@ -1,6 +1,6 @@
 function checkUser(connection,data,callback){
     
-    var query = connection.query("SELECT `user`.`user_id`,`user`.`username` from `user` WHERE ? AND ?  ",[{password:data.password},{email:data.email}],function(err, rows, fields) {
+    var query = connection.query("SELECT `user`.`user_id`,`user`.`username`,`user_details`.`profile_photo` from `user` LEFT JOIN `user_details` ON `user`.`user_id` = `user_details`.`user_id` WHERE ? AND ?  ",[{password:data.password},{email:data.email}],function(err, rows, fields) {
           if (!err){
              // console.log(query.sql)
               if(rows.length > 0){
@@ -8,6 +8,7 @@ function checkUser(connection,data,callback){
                       var userDetail = {
                         user_id:rows[0]['user_id'],
                         username:rows[0]['username'],
+                        profile_photo:rows[0]['profile_photo'],
                         success:1
                     }
                      callback(userDetail);

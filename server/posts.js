@@ -118,7 +118,7 @@ function getPostData(connection,post_id,callback){
 function getPostReplies(connection,data,callback){
  
     var query = connection.query("SELECT @reply_id := `reply_id` as `reply_id`,@user_id := `user_id` as `user_id`,(SELECT `username` FROM `user` WHERE `user_id` = @user_id) as username,"+
-      " `reply_text`,CASE WHEN (TIMESTAMPDIFF(SECOND,`post_reply`.`created_at`,CURRENT_TIMESTAMP()))   < 60"+
+      "(SELECT `profile_photo` FROM `user_details` WHERE `user_id` = @user_id) as profile_photo, `reply_text`,CASE WHEN (TIMESTAMPDIFF(SECOND,`post_reply`.`created_at`,CURRENT_TIMESTAMP()))   < 60"+
 				" THEN  Concat((TIMESTAMPDIFF(SECOND,`post_reply`.`created_at`,CURRENT_TIMESTAMP())),' secs ago')"+
 		                " WHEN (TIMESTAMPDIFF(MINUTE,`post_reply`.`created_at`,CURRENT_TIMESTAMP()))  < 60"+
 		                " THEN  Concat((TIMESTAMPDIFF(MINUTE,`post_reply`.`created_at`,CURRENT_TIMESTAMP())),' min ago')"+
@@ -143,6 +143,7 @@ function getPostReplies(connection,data,callback){
                         user_id:rows[i]['user_id'],
                         post_id:data.post_id,
                         username:rows[i]['username'],
+                        profile_photo:rows[i]['profile_photo'],
                         reply_text:rows[i]['reply_text'],
                         time_gone:rows[i]['time_gone'],
                         no_replies:rows[i]['no_replies']
@@ -186,15 +187,13 @@ function insertReply(connection,data,callback){
      var insertDetails = {
          post_id:data.post_id,
          reply_text:data.reply_text,
-         user_id:1,
+         user_id:data.user_id,
      }
      
       var query = connection.query('INSERT INTO post_reply SET ?', insertDetails, function(err, result) {
        if(!err){
            var reply_info = {
-            user_id:1,
             post_id:data.post_id,
-            username:"Chrisadriane",
             reply_text:data.reply_text,
             time_gone:"Just Now",
          }

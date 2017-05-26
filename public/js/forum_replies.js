@@ -1,6 +1,5 @@
  $(function () {
 
-   
    var post_id = getCookie("post_id");
    
    $.ajax({type: "POST",  url: "getPostReplies", data:{post_id:post_id}
@@ -19,7 +18,8 @@
 
         var replyData = {
             post_id: post_id,
-            reply_text: reply_text
+            reply_text: reply_text,
+            user_id:getCookie("user_id")
         };
     
         $.ajax({
@@ -67,9 +67,15 @@
             var reply_text = data[i].reply_text;
             var username = data[i].username;
             var time_gone = data[i].time_gone;
+            var profile_photo = data[i].profile_photo;
+            
+            if(byMe){
+                   username = getCookie("username");
+                   profile_photo = getCookie("profile_photo");
+            }
             
               var content = '<div class="box-comment" > '+
-                                '<img class="img-circle img-sm" src="img/user1-128x128.jpg" alt="User Image">'+
+                                '<img class="img-circle img-sm" src="/image_uploads/profile/'+profile_photo+'" alt="User Image">'+
                                 '<div class="comment-text" >'+
                                 '<span class="username">'+username+'<span class="text-muted pull-right">'+time_gone+'</span>'+
                                 '</span>'+reply_text+

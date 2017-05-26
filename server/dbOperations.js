@@ -2,12 +2,12 @@ var mysql = require('mysql');
 var auth = require('./auth');
 var posts = require('./posts');
 
-/*var db_config = {
+var db_config = {
       host     : '127.0.0.1',
       user     : 'root',
       password : 'chowder60',
       database : 'forum_site',
- };*/
+ };
 
 /*var db_config = {
       host     : 'us-cdbr-iron-east-04.cleardb.net',
@@ -15,14 +15,13 @@ var posts = require('./posts');
       password : '9732e48f0b1f2bc',
       database : 'heroku_4ea7a5d697457a3',
  };*/
-var db_config = {
+
+/*var db_config = {
       host     : 'sql11.freemysqlhosting.net',
       user     : 'sql11176628',
       password : 'm5SDm8Jf8W',
       database : 'sql11176628',
- };
-
-
+ };*/
     var connection;
 
     function handleDisconnect() {

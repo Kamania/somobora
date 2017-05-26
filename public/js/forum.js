@@ -14,16 +14,17 @@
     
     var user_id = getCookie("user_id");
     if( user_id != null && user_id != -1 ){
-        $("#ask_login_box").addClass("hidden");;
+  
+         $("#ask_login_box").addClass("hidden");;
         $("#ask_post_box").removeClass("hidden");
     }else{
-        $("#ask_login_box").removeClass("hidden");;
+          $("#ask_login_box").removeClass("hidden");;
         $("#ask_post_box").addClass("hidden");
+      
     }
     
     $("#onlineUsersDiv").hide();
     
-
    $.ajax({
      type: "POST",
      url: "getPosts",
@@ -97,6 +98,8 @@
             $("#ask_post_box").removeClass("hidden");
             $('#login_modal').modal('hide');
             setCookie("user_id",res.user_id);
+            setCookie("username",res.username);
+            setCookie("profile_photo",res.profile_photo);
         }else{
             alert("Invalid credentials !!");
         }
@@ -222,7 +225,6 @@
     function sendPost(image_path){
         var post_text = $("#postTA").val();
         var category_id = $("#selectCategory").val();
-       
         
         var data = {
             category_id:category_id,
@@ -253,6 +255,9 @@
         
         var username = $("#usernameTa").val();
         
+         setCookie("username",username,1);
+         setCookie("profile_photo",data.profile_photo,1);
+        
         var data = {
             user_id: getCookie("user_id"),
             username: username,
@@ -267,6 +272,7 @@
              if(res["status"] == 1){
                  $("#usernameTa").val("");
                  $("#profile_modal").modal("hide");
+                
                   location.reload();
              }else{
                  alert(res["message"]);
