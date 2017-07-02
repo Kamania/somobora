@@ -9,19 +9,19 @@ var posts = require('./posts');
       database : 'forum_site',
  };*/
 
-/*var db_config = {
+var db_config = {
       host     : 'us-cdbr-iron-east-04.cleardb.net',
       user     : 'b24451f926df20',
       password : '9732e48f0b1f2bc',
       database : 'heroku_4ea7a5d697457a3',
- };*/
+ };
 
-var db_config = {
+/*var db_config = {
       host     : 'sql11.freemysqlhosting.net',
       user     : 'sql11176628',
       password : 'm5SDm8Jf8W',
       database : 'sql11176628',
- };
+ };*/
     var connection;
 
     function handleDisconnect() {
