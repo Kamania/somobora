@@ -10,7 +10,7 @@ var posts = require('./posts');
  };*/
 
 var db_config = {
-      host     : 'us-cdbr-iron-east-04.cleardb.net',
+      host     : 'us-cdbr-iron-east-03.cleardb.net',
       user     : 'b24451f926df20',
       password : '9732e48f0b1f2bc',
       database : 'heroku_4ea7a5d697457a3',

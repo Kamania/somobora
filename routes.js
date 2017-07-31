@@ -113,6 +113,7 @@ module.exports = function (app, io,address) {
              res.status(200).send(result);
         });
     });
+    
      app.post('/uploadProfile', function(req, res){
          res.setHeader('Content-Type', 'application/json');
           var form = new formidable.IncomingForm();
@@ -137,7 +138,7 @@ module.exports = function (app, io,address) {
           var form = new formidable.IncomingForm();
            var fileName = "";
           form.multiples = true;
-          form.uploadDir = path.join(__dirname, '/public/image_uploads/posts/');
+          form.uploadDir = path.join(__dirname, '/public/image_uploads/bounds/');
           form.on('file', function(field, file) {
              fileName = file.name;  
             fs.rename(file.path, path.join(form.uploadDir, file.name));
@@ -147,7 +148,7 @@ module.exports = function (app, io,address) {
           });
           form.on('end', function() {
             res.status(200).send({fileName:fileName,message:"uploaded successfully !!"});
-           //res.end("uploaded successfully !!");
+           res.end("uploaded successfully !!");
           });
           form.parse(req);
         });
