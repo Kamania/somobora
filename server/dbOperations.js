@@ -11,9 +11,9 @@ var posts = require('./posts');
 
 var db_config = {
       host     : 'us-cdbr-iron-east-03.cleardb.net',
-      user     : 'b24451f926df20',
-      password : '9732e48f0b1f2bc',
-      database : 'heroku_4ea7a5d697457a3',
+      user     : 'bd565398302d45',
+      password : '40d386e5',
+      database : 'heroku_f81c0d6cd93c9df',
  };
 
 /*var db_config = {
