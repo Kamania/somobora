@@ -10,4 +10,4 @@ require('./config')(app);
 require('./routes')(app, io,address);
 
 
-console.log('Forum is running on http://host:' + port +" address "+address);
+console.log('Soma Bora is running on http://host:' + port +" address "+address);

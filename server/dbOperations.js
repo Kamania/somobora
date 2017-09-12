@@ -1,27 +1,21 @@
 var mysql = require('mysql');
-var auth = require('./auth');
-var posts = require('./posts');
+var language = require('./language');
 
-/*var db_config = {
+ var db_config = {
       host     : '127.0.0.1',
       user     : 'root',
-      password : 'chowder60',
-      database : 'forum_site',
- };*/
+      password : 'chowder',
+      database : 'soma_bora',
+ };
 
-var db_config = {
+/*var db_config = {
       host     : 'us-cdbr-iron-east-03.cleardb.net',
       user     : 'bd565398302d45',
       password : '40d386e5',
       database : 'heroku_f81c0d6cd93c9df',
- };
-
-/*var db_config = {
-      host     : 'sql11.freemysqlhosting.net',
-      user     : 'sql11176628',
-      password : 'm5SDm8Jf8W',
-      database : 'sql11176628',
  };*/
+ 
+
     var connection;
 
     function handleDisconnect() {
@@ -46,65 +40,22 @@ var db_config = {
         }
       });
     }
- var checkUser = function(data,callback){
-        auth.checkUser(connection,data,function(result){
-           callback(result); 
-        });
- }
-  var getUserDetails = function(data,callback){
-        auth.getUserDetails(connection,data,function(result){
-           callback(result); 
-        });
- }
- 
-  var registerUser = function(data,callback){
-        auth.registerUser(connection,data,function(result){
-           callback(result); 
-        });
- }
-   var registerUserProfile = function(data,callback){
-        auth.registerUserProfile(connection,data,function(result){
-           callback(result); 
-        });
- }
-    var getPosts = function(data,callback){
-        if(data.category_id == "trending"){
-            posts.getTrendingPosts(connection,data,function(result){
-              callback(result); 
-           });
-        }else{
-          posts.getPosts(connection,data,function(result){
-           callback(result); 
-         });  
-        }
-        
-    }
-     var getPostReplies = function(data,callback){
-        posts.getPostReplies(connection,data,function(result){
+
+    var getIdentifyImageQuestions = function(data,callback){
+        language.getIdentifyImageQuestions(connection,data,function(result){
            callback(result); 
         });
     }
-    var insertReply = function(data,callback){
-        posts.insertReply(connection,data,function(result){
-           callback(result); 
-        });
-    }
-    var createPost = function(data,callback){
-        posts.createPost(connection,data,function(result){
+    var getSelectPicQuestions = function(data,callback){
+        language.getSelectPicQuestions(connection,data,function(result){
            callback(result); 
         });
     }
     
     handleDisconnect();
     
-    exports.getPosts = getPosts;
-    exports.getPostReplies = getPostReplies;
-    exports.insertReply = insertReply;
-    exports.createPost = createPost;
-    exports.checkUser = checkUser;
-    exports.registerUser = registerUser;
-    exports.registerUserProfile = registerUserProfile
-    exports.getUserDetails = getUserDetails;
+exports.getIdentifyImageQuestions = getIdentifyImageQuestions;
+exports.getSelectPicQuestions = getSelectPicQuestions;  
 
     
     

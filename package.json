@@ -1,24 +1,24 @@
 {
   "name": "ProjectCastle",
   "version": "0.0.1",
-  "description": "Realtime chat system for ProjectCastle",
+  "description": "Realtime chat system for Soma Bora",
   "main": "app.js",
   "scripts": {
-     "start": "node server.js"
+     "start": "node app.js"
   },
   "keywords": [
     "node",
-    "chat",
+    "somo bora",
     "system"
   ],
   "author": "Chris Kipruto",
-  "license": "Apache Licence",
+  "license": "Private Licence",
   "dependencies": {
     "ejs": "*",
     "express": "*",
-	"mysql": "*",
+    "mysql": "*",
     "socket.io": "*",
-    "node-static": "~0.7.1",
-    "sqlite3":"*"
+    "node-static": "*",
+    "body-parser":"*",
   }
 }
